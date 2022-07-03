@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- <div class="timer" id="timer">0</div>
+    <div class="container">
+        <div class="type-display" id="typeDisplay">type</div>
+        <textarea class="type-Input" id="typeInput" autofocus>type</textarea> -->
+
+    <center>
+        <p><img src="" id="img"></p>
+        <h1 id="start" class="text"> 何かキーを押してください</h1>
+    </center>
+
+    </div>
+
+    <script>
+
+        let Question = ["apple", "banana", "melon", "mango", "starwberry", "blueberry", "orange"]
+        let Question_Now = Math.floor(Math.random() * Question.length);
+        let Q_Start = 0;
+        let Q_length = Question[Question_Now].length;
+
+        window.addEventListener('keydown', push_Keydown);
+        function push_Keydown(event) {
+            let inputAnswer = event.key;
+            if (Q_length == Q_length - Q_Start) {
+                document.getElementById('img').src = Question[Question_Now] + '.png'
+                document.getElementById('start').innerHTML = Question[Question_Now].substring(Q_Start, Q_length);
+            }
+
+            if (Question[Question_Now].charAt(Q_Start) === inputAnswer) {
+                Q_Start++;
+                document.getElementById('start').innerHTML = Question[Question_Now].substring(Q_Start, Q_length);
+                if (Q_length - Q_Start === 0) {
+                    Question_Now = Math.floor(Math.random() * Question.length);
+                    Q_Start = 0;
+                    Q_length = Question[Question_Now].length;
+                    console.log(Q_length)
+                    document.getElementById('img').src = Question[Question_Now] + '.png'
+                    document.getElementById('start').innerHTML = Question[Question_Now].substring(Q_Start, Q_length)
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
