@@ -10,10 +10,25 @@
 </head>
 
 <body>
+    <style>
+        div {
+            display: flex;
+        }
+
+        h2 {
+            margin: 2px;
+        }
+    </style>
 
     <center>
+
+        <div>
+            <h2>count :</h2>
+            <h2 id="countId">0</h2>
+        </div>
         <p><img src="" id="img"></p>
         <h1 id="start" class="text"> 何かキーを押してください</h1>
+
     </center>
 
     </div>
@@ -24,9 +39,12 @@
         let Question_Now = Math.floor(Math.random() * Question.length);
         let Q_Start = 0;
         let Q_length = Question[Question_Now].length;
+        let Count = 0;
+
 
         window.addEventListener('keydown', push_Keydown);
         function push_Keydown(event) {
+
             let inputAnswer = event.key;
             if (Q_length == Q_length - Q_Start) {
                 document.getElementById('img').src = Question[Question_Now] + '.png'
@@ -36,17 +54,24 @@
             if (Question[Question_Now].charAt(Q_Start) === inputAnswer) {
                 Q_Start++;
                 document.getElementById('start').innerHTML = Question[Question_Now].substring(Q_Start, Q_length);
+                if (Count === 5) {
+                    alert('ゲームクリア！')
+                    window.location.reload();
+                }
                 if (Q_length - Q_Start === 0) {
                     Question_Now = Math.floor(Math.random() * Question.length);
                     Q_Start = 0;
                     Q_length = Question[Question_Now].length;
-                    console.log(Q_length)
                     document.getElementById('img').src = Question[Question_Now] + '.png'
                     document.getElementById('start').innerHTML = Question[Question_Now].substring(Q_Start, Q_length)
-                }
-            }
-        }
+                    Count++;
+                    document.getElementById('countId').innerHTML = Count;
 
+                }
+
+            }
+
+        }
     </script>
 </body>
 
